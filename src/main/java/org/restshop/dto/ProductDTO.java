@@ -12,8 +12,6 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class ProductDTO {
 
-    private Long id;
-
     @NotBlank(message = "Name is required")
     private String name;
 
@@ -22,6 +20,7 @@ public class ProductDTO {
     private BigDecimal price;
 
     @Min(0)
+    @NotNull(message = "Quantity is required")
     private Integer quantity;
 
     @Email
@@ -30,7 +29,8 @@ public class ProductDTO {
     @Pattern(regexp = "\\d{3}-\\d{3}-\\d{4}")
     private String phone;
 
-    @NotNull
+    @NotBlank(message = "Description is required")
+    @Size(max = 500, message = "Description must not exceed 500 characters")
     private String description;
 
     private boolean active;

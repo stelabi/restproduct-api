@@ -7,8 +7,8 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/shop
     driver-class-name: org.postgresql.Driver
-    username: postgres
-    password: admin
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:admin}
     hikari:
       minimumIdle: 4
       maximumPoolSize: 8

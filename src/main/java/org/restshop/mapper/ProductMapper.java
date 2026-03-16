@@ -3,6 +3,7 @@ package org.restshop.mapper;
 
 import lombok.extern.slf4j.Slf4j;
 import org.restshop.dto.ProductDTO;
+import org.restshop.dto.ProductResponseDTO;
 import org.restshop.entity.Product;
 import org.springframework.stereotype.Component;
 
@@ -33,14 +34,12 @@ public class ProductMapper {
     }
 
     // Entity -> DTO
-
     public ProductDTO entityToDto(Product product){
         if (product == null) {
             return null;
         }
 
         ProductDTO dto = new ProductDTO();
-        dto.setId(product.getId());
         dto.setName(product.getName());
         dto.setDescription(product.getDescription());
         dto.setPhone(product.getPhone());
@@ -73,6 +72,39 @@ public class ProductMapper {
 
         return entityList.stream()
                 .map(this::entityToDto)
+                .collect(Collectors.toList());
+    }
+
+    // Entity -> ResponseDTO
+    public ProductResponseDTO entityToResponseDto(Product product) {
+        if (product == null) {
+            return null;
+        }
+
+        ProductResponseDTO dto = new ProductResponseDTO();
+        dto.setId(product.getId());
+        dto.setName(product.getName());
+        dto.setDescription(product.getDescription());
+        dto.setPhone(product.getPhone());
+        dto.setContact(product.getContact());
+        dto.setPrice(product.getPrice());
+        dto.setQuantity(product.getQuantity());
+        dto.setActive(product.isActive());
+        dto.setCreatedAt(product.getCreatedAt());
+        dto.setUpdatedAt(product.getUpdatedAt());
+
+        return dto;
+    }
+
+    // List Entity -> List ResponseDTO
+    public List<ProductResponseDTO> entityListToResponseDtoList(List<Product> entityList) {
+        if (entityList == null || entityList.isEmpty()) {
+            log.debug("Empty or null Product entity list provided");
+            return new ArrayList<>();
+        }
+
+        return entityList.stream()
+                .map(this::entityToResponseDto)
                 .collect(Collectors.toList());
     }
 
