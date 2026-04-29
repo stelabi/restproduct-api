@@ -5,10 +5,10 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/shop
-    driver-class-name: org.postgresql.Driver
-    username: ${DB_USERNAME:postgres}
-    password: ${DB_PASSWORD:admin}
+    url: ${DB_URL}
+    driver-class-name: ${DB_PLATFORM}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     hikari:
       minimumIdle: 4
       maximumPoolSize: 8
